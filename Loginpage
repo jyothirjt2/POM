@@ -1,8 +1,11 @@
-class LoginPage:
+from selenium.webdriver.common.by import By
+
+
+class LoginPageLocators:
     # Locators of alla elements
     textbox_username_id = "txtUserID"
     textbox_password_id = "TxtPwd"
-    button_login_xpath = "btnlogin"
+    button_login_xpath = '//*[@id="btnlogin"]'
     link_logout_linktext = "Log out"
 
     # create constructor to initialize driver
@@ -10,16 +13,16 @@ class LoginPage:
         self.driver = driver
 
     # for every element we need to create an action method
-    def setusername(self, username):
-        self.driver.find_element_by_id(self.textbox_username_id).send_keys(username)
+    def setusername(self,username):
+        self.driver.find_element(By.ID,self.textbox_username_id).send_keys(username)
 
     def setpassword(self, password):
-        self.driver.find_element_by_id(self.textbox_password_id).send_keys(password)
+        self.driver.find_element(By.ID,self.textbox_password_id).send_keys(password)
 
     def clicklogin(self):
-        self.driver.find_element(By.XPATH, self.button_login_xpath).click()
+        self.driver.find_element(By.XPATH,self.button_login_xpath).click()
 
     def clicklogout(self):
-        self.driver.find_element(By.XPATH, self.link_logout_linktext).click()
+        self.driver.find_element(By.ID,self.link_logout_linktext).click()
 
 
