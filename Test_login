@@ -4,8 +4,7 @@ import HtmlTestRunner
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from pageObjects.Loginpage import LoginPage
+from pageObjects.Loginpage import LoginPageLocators
 
 
 class LoginTest(unittest.TestCase):
@@ -21,7 +20,8 @@ class LoginTest(unittest.TestCase):
 
     def test_login(self):
         # we have to create a var before calling methods from pages
-        lp = LoginPage(self.driver)               # this class is having a constructor, given driver parameter
+        lp = LoginPageLocators(self.driver)  # this class is having a constructor, given driver parameter
+        time.sleep(3)
         lp.setusername(self.username)
         lp.setpassword(self.password)
         lp.clicklogin()
@@ -29,11 +29,12 @@ class LoginTest(unittest.TestCase):
 
         if self.driver.title == "CRMScreen":
             print("test is passed")
- 
-   @classmethod
-   def tearDownClass(cls):
-       cls.driver.close()
-       
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.close()
+
+
 if __name__ == "__main__":
     unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="C:\\Users\\DELL"
-                                                             "\\PycharmProjects\\pythonProject1\\POM\\Reports"))
+                                                                  "\\PycharmProjects\\pythonProject1\\POM\\Reports"))
