@@ -1,0 +1,39 @@
+import unittest
+import time
+import HtmlTestRunner
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from pageObjects.Loginpage import LoginPage
+
+
+class LoginTest(unittest.TestCase):
+    baseURL = "http://49.50.106.137/effitpa/"
+    username = "jyothi"
+    password = "Ggg@123"
+    service = Service(executable_path=ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+
+    @classmethod
+    def setUpClass(cls):
+        cls.driver.get(cls.baseURL)
+
+    def test_login(self):
+        # we have to create a var before calling methods from pages
+        lp = LoginPage(self.driver)               # this class is having a constructor, given driver parameter
+        lp.setusername(self.username)
+        lp.setpassword(self.password)
+        lp.clicklogin()
+        time.sleep(3)
+
+        if self.driver.title == "CRMScreen":
+            print("test is passed")
+ 
+   @classmethod
+   def tearDownClass(cls):
+       cls.driver.close()
+       
+if __name__ == "__main__":
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="C:\\Users\\DELL"
+                                                             "\\PycharmProjects\\pythonProject1\\POM\\Reports"))
